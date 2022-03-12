@@ -1,0 +1,360 @@
+#!/usr/bin/env bash
+# ----------------------------------
+
+alias s="source $ZDOTDIR/.zshrc"
+alias ez="v $ZDOTDIR/.zshrc"
+
+alias path="echo $PATH | tr ':' '\n' | sort"
+alias fpath="echo $fpath | tr ' ' '\n' | sort"
+
+# ----------------------------------
+
+# alias sed=gsed
+# alias grep="grep --color=auto"
+
+# ----------------------------------
+
+alias v="nvim"
+alias vi="nvim"
+alias vim="nvim"
+
+# fix python path isse (brew docotor)
+# https://github.com/pyenv/pyenv/issues/106
+alias brew="env PATH=${PATH//$(pyenv root)\/shims:/} brew"
+
+alias con="cd ~/.config"
+alias ea="v ~/.config/alacritty/alacritty.yml"
+alias ee="v ~/.zshenv"
+alias et="v ~/.config/tmux/tmux.conf"
+alias ev="v ~/.config/nvim/init.vim"
+alias ez="v ~/.config/zsh/.zshrc"
+alias ealias="v ~/.config/zsh/.aliases"
+
+alias dot="$(which git) --git-dir=$HOME/.dotfiles --work-tree=$HOME"
+alias dotinstall="git clone --bare https://github.com/srobinson/dotfiles.git $HOME/.dotfiles && source ~/.zshrc && source ~/.config/zsh/.zshrc"
+
+# ----------------------------------
+
+alias weather="clear && curl wttr.in"
+
+# ----------------------------------
+
+unset GREP_OPTIONS
+# alias rm=trash
+alias cobra="~/go/bin/cobra"
+alias porter="~/Dev/pers/porter/bin/porter"
+
+# ----------------------------------
+
+alias cl="clear"
+# alias cat=~/.local/cat.sh
+
+# ----------------------------------
+
+# https://unix.stackexchange.com/a/10065
+# if stdout is a terminal
+if test -t 1; then
+  # see if it supports colors
+  ncolors=$(tput colors)
+  if test -n "$ncolors" && test $ncolors -ge 8; then
+    bold="$(tput bold)"
+    underline="$(tput smul)"
+    standout="$(tput smso)"
+    normal="$(tput sgr0)"
+    black="$(tput setaf 0)"
+    red="$(tput setaf 1)"
+    green="$(tput setaf 2)"
+    yellow="$(tput setaf 3)"
+    blue="$(tput setaf 4)"
+    magenta="$(tput setaf 5)"
+    cyan="$(tput setaf 6)"
+    white="$(tput setaf 7)"
+  fi
+fi
+
+# ----------------------------------
+# tmux
+
+alias t="tmux"
+alias ta="t a -t"
+alias tls="t ls"
+alias tn="t new -t"
+
+alias vim="nvim"
+alias v="nvim"
+alias vf="vifm"
+
+# ----------------------------------
+# fzf
+
+# REFACTOR ME
+# if ! { [ "$TERM" = "screen" ] && [ -n "$TMUX" ]; }; then
+#   export KUBECONFIG=
+# fi
+
+# ----------------------------------
+# alias a='fasd -a'        # any
+# alias s='fasd -si'       # show / search / select
+# alias d='fasd -d'        # directory
+# alias f='fasd -f'        # file
+# alias sd='fasd -sid'     # interactive directory selection
+# alias sf='fasd -sif'     # interactive file selection
+# alias z='fasd_cd -d'     # cd, same functionality as j in autojump
+# alias zz='fasd_cd -d -i' # cd with interactive selection
+
+alias l='exa --color=always -la'
+alias l.='exa -a | egrep "^\."'
+
+alias la='exa --color=always -lA'
+alias ll='exa --color=always -l'
+alias ls='exa --color=always -G'
+
+alias myip="curl http://ipecho.net/plain; echo"
+alias iplocal='ipconfig getifaddr en0'
+
+# ----------------------------------
+# kubectl
+# --------------------------------------------------------------
+
+alias -g k="kubectl"
+alias kx="kubectx"
+alias kns="kubens"
+
+alias sas="shark8s"
+
+__kubectl() {
+  if [ -z "$KUBECONFIG" ]; then
+    KUBECONFIG="$HOME/.config/tmux/kube/config.$I"
+  fi
+  kubectl --kubeconfig="$KUBECONFIG" "$@"
+  cp -f "$KUBECONFIG" "$HOME/.kube/config" &> /dev/null
+}
+
+kube-context() {
+  local context=$1
+  local ns=$2
+  KUBECONFIG=/Users/stuart.s.robinson/.config/tmux/kube/config.$I
+  if [ ! -f "$KUBECONFIG" ]; then
+    if [ ! -f ~/.kube/config ]; then
+      echo "Please configure kube config"
+      exit
+    fi
+    cp ~/.kube/config "$KUBECONFIG"
+  fi
+  kubectl config use-context "$context" --kubeconfig="$KUBECONFIG"
+  if [ -n "$ns" ]; then
+    kubectl config set-context --current --namespace="$ns" --kubeconfig="$KUBECONFIG"
+  fi
+  cp "$KUBECONFIG" ~/.kube.config
+}
+
+kcn() {
+  local ns=$1
+  if [ -z "$1" ]; then
+    kubectl config get-contexts --kubeconfig="$KUBECONFIG"
+  else
+    kubectl config set-context --current --namespace="$1" --kubeconfig="$KUBECONFIG"
+  fi
+}
+
+kp() {
+  __kubectl get pods "$@" --sort-by="{.spec.nodeName}" \
+    | sed "s/Running/${green}Running${normal}/g" \
+    | sed "s/Pending/${yellow}Pending${normal}/g" \
+    | sed "s/Completed/${blue}Completed${normal}/g" \
+    | sed "s/Error/${red}Error${normal}/g" \
+    | sed "s/CrashLoopBackOff/${red}CrashLoopBackOff${normal}/g"
+}
+
+kwatch() {
+  watch -d -e -t -c -n 5 'kubectl get pods "$@" --sort-by="{.spec.nodeName}"'
+}
+
+kbb() {
+  kubectl run -it --rm --restart=Never busybox --image=gcr.io/google-containers/busybox sh
+}
+
+alias mk="minikube"
+
+alias kcc="__kubectl config get-contexts"
+# apk --update add curl
+alias kbug="__kubectl run -it --rm --restart=Never --image=shellai.azurecr.io/devops/dtools dtools -- /bin/bash"
+alias ky="nvim -c 'set ft=yaml' -"
+
+# ky() {
+#   kubectl "$@" -o yaml | yq e
+# }
+# compdef ky=kubectl
+
+alias kcd="kube-context shellai-westeurope-dev"
+alias kcs="kube-context shellai-westeurope-staging"
+alias kcpp="kube-context shellai-westeurope-preprod"
+alias kcp="kube-context shellai-westeurope-prod"
+alias kcop="kube-context shellai-westeurope-oc"
+
+alias akcda="kube-context westeurope-dev-admin"
+alias akcsa="kube-context westeurope-staging-admin"
+alias akcppa="kube-context westeurope-preprod-admin"
+alias akcpa="kube-context westeurope-prod-admin"
+
+alias akcd="kube-context westeurope-dev"
+alias akcs="kube-context westeurope-staging"
+alias akcpp="kube-context westeurope-preprod"
+alias akcp="kube-context westeurope-prod"
+
+# alias kwatch="watch -d -e -t -n 5 -x bash 'kp'"
+
+alias kkn="__kubectl get pod -o=custom-columns=NODE:.spec.nodeName,NAME:.metadata.name --all-namespaces | sort"
+
+alias kpf="__kubectl port-forward"
+
+alias kl="stern"
+
+alias ka="__kubectl get all"
+alias kc="__kubectl get cert"
+alias kd="__kubectl describe"
+alias kg="__kubectl get"
+alias ki="__kubectl get ingress"
+alias kn="__kubectl get nodes"
+# alias kp="__kubectl get pods --sort-by="{.spec.nodeName}""
+alias ksv="__kubectl get svc"
+alias ks="__kubectl get secret"
+
+alias kda="__kubectl describe all"
+alias kdc="__kubectl describe cert"
+alias kdd="__kubectl describe deploy"
+alias kdi="__kubectl describe ingress"
+alias kdn="__kubectl describe node"
+alias kdp="__kubectl describe po"
+alias kdsv="__kubectl describe svc"
+alias kds="__kubectl describe secret"
+
+alias tf="terraform"
+alias tdocs="terraform-docs"
+alias tfi="terraform-config-inspect"
+
+# Shortcuts
+alias d="cd ~/Documents"
+alias dl="cd ~/Downloads"
+alias dt="cd ~/Desktop"
+
+alias apps="cd ~/Dev/apps"
+alias dev="cd ~/Dev"
+alias dj="cd ~/DJ"
+alias home="cd ~/"
+alias shell="cd ~/Dev/shell"
+alias ops="cd ~/Dev/shell/devops"
+alias pers="cd ~/Dev/pers"
+alias stencli="cd ~/Dev/shell/devops/stencli"
+
+alias g="git"
+alias h="history"
+alias j="jobs"
+
+alias ports="netstat -ap tcp | grep -i 'listen'"
+
+# Enable aliases to be sudo’ed
+alias sudo='sudo '
+
+# Get week number
+alias week='date +%V'
+
+# Stopwatch
+alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
+
+# Get OS X Software Updates, and update installed Ruby gems, Homebrew, npm, and their installed packages
+alias update='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup; npm install npm -g; npm update -g; sudo gem update --system; sudo gem update'
+
+# IP addresses
+alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias localip="ipconfig getifaddr en0"
+alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
+
+# Flush Directory Service cache
+alias flush="dscacheutil -flushcache && killall -HUP mDNSResponder"
+alias flushdns="sudo killall -HUP mDNSResponder;sudo killall mDNSResponderHelper;sudo dscacheutil -flushcache"
+
+# Clean up LaunchServices to remove duplicates in the “Open With” menu
+alias lscleanup="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"
+
+# View HTTP traffic
+alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
+alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
+
+# Canonical hex dump; some systems have this symlinked
+command -v hd > /dev/null || alias hd="hexdump -C"
+
+# OS X has no `md5sum`, so use `md5` as a fallback
+command -v md5sum > /dev/null || alias md5sum="md5"
+
+# OS X has no `sha1sum`, so use `shasum` as a fallback
+command -v sha1sum > /dev/null || alias sha1sum="shasum"
+
+# JavaScriptCore REPL
+jscbin="/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Resources/jsc"
+[ -e "${jscbin}" ] && alias jsc="${jscbin}"
+unset jscbin
+
+# Trim new lines and copy to clipboard
+alias c="tr -d '\n' | pbcopy"
+
+# Recursively delete `.DS_Store` files
+alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
+
+# Empty the Trash on all mounted volumes and the main HDD
+# Also, clear Apple’s System Logs to improve shell startup speed
+alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl"
+
+# Show/hide hidden files in Finder
+alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
+alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
+
+# Hide/show all desktop icons (useful when presenting)
+alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
+alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
+
+# URL-encode strings
+alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
+
+# Merge PDF files
+# Usage: `mergepdf -o output.pdf input{1,2,3}.pdf`
+alias mergepdf='/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Resources/join.py'
+
+# Disable Spotlight
+alias spotoff="sudo mdutil -a -i off"
+# Enable Spotlight
+alias spoton="sudo mdutil -a -i on"
+
+# PlistBuddy alias, because sometimes `defaults` just doesn’t cut it
+alias plistbuddy="/usr/libexec/PlistBuddy"
+
+# Ring the terminal bell, and put a badge on Terminal.app’s Dock icon
+# (useful when executing time-consuming commands)
+alias badge="tput bel"
+
+# Intuitive map function
+# For example, to list all directories that contain a certain file:
+# find . -name .gitattributes | map dirname
+alias map="xargs -n1"
+
+# One of @janmoesen’s ProTip™s
+for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
+  alias "$method"="lwp-request -m '$method'"
+done
+
+# Make Grunt print stack traces by default
+command -v grunt > /dev/null && alias grunt="grunt --stack"
+
+# Stuff I never really use but cannot delete either because of http://xkcd.com/530/
+alias stfu="osascript -e 'set volume output muted true'"
+alias pumpitup="osascript -e 'set volume 7'"
+
+# Kill all the tabs in Chrome to free up memory
+# [C] explained: http://www.commandlinefu.com/commands/view/402/exclude-grep-from-your-grepped-output-of-ps-alias-included-in-description
+alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v extension-process | tr -s ' ' | cut -d ' ' -f2 | xargs kill"
+
+# Lock the screen (when going AFK)
+alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
+
+# Reload the shell (i.e. invoke as a login shell)
+alias reload="exec $SHELL -l"

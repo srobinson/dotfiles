@@ -1,0 +1,147 @@
+[user]
+	name = Stuart Robinson
+	email = robinson.stu@gmail.com
+  signingkey = E3F2A7A53A893971
+[alias]
+  a = add
+  aa = add --all :confused:
+  b = branch -avv
+  bd = branch -d
+  bm = branch -m
+  ci = commit
+  cia = commit --amend
+  ciaa = commit --all --amend
+  ciaan = commit --all --amend --no-edit
+  cian = commit --amend --no-edit
+  co = checkout
+  com = checkout master
+  contains = branch -avv --contains
+  d = diff --word-diff=color
+  di = diff --staged --word-diff=color
+  discard = checkout HEAD --
+  e = config --local user.email
+  f = fetch --prune --all
+  fd = filter-branch --subdirectory-filter
+  fm = !git f && git m
+  h = show HEAD --word-diff=color
+  hf = show HEAD --name-only
+  l = log --oneline --decorate
+  laf = log --oneline --decorate --follow --all --
+  lag = log --oneline --decorate --graph --all
+  lc = log --oneline --decorate --graph --left-right
+  lch = !git log --oneline --decorate --graph --left-right HEAD...$1
+  lf = log --oneline --decorate --follow --
+  lg = log --oneline --decorate --graph
+  m = merge
+  n = config --local user.name
+  r = rebase
+  ra = rebase --abort
+  rc = rebase --continue
+  ri = rebase --interactive
+  rs = rebase --skip
+  rv = remote -v
+  s = status -sb
+  st = status
+  su = submodule update --init --recursive
+  supgrade = submodule foreach ‘git f && git co FETCH_HEAD’
+  t = tag
+  td = tag -d
+  unstage = reset HEAD --
+  up = push origin
+  ch = checkout
+  ci = commit
+  cleanup = !ruby “~/Developer/personal/dotfiles/git-extras/git-cleanup.rb”
+  d = diff
+  discard = reset --hard HEAD
+  ghfork = !sh “~/Developer/personal/dotfiles/git-extras/git-ghpull.sh”
+  graph = log --graph
+  last = log -n 10
+  pr = “!f() { git fetch -fu ${2:-origin} refs/pull/$1/head:pr/$1; } ; f”
+  release   = !sh “~/Developer/personal/dotfiles/git-extras/git-release.sh”
+  rmtag = “!sh -c ‘git tag -d $1; git push origin :refs/tags/$1’”
+  setup     = !zsh “~/Developer/personal/dotfiles/git-extras/git-setup.sh”
+  summary   = !zsh “~/Developer/personal/dotfiles/git-extras/git-summary.sh”
+	logs = log --show-signature
+
+  dangle = fsck --full
+  exipre = reflog expire --expire-unreachable=now --all
+  # gc --prune=now
+  # whois = “!sh -c ‘git log -i -1 --pretty=\“format:%an <%ae>\n\” --author=\“$1\“’ -”
+[push]
+	default = current
+[color]
+  branch = auto
+  diff = auto
+  status = auto
+  ui = true
+
+# [color “status”]
+#   added = green bold
+#   changed  = cyan bold
+#   untracked = yellow bold
+# [color “branch”]
+#   current = cyan bold
+#   local = yellow
+#   remote = green
+
+[core]
+	excludesfile = ~/.gitignore
+ #pager = diff-highlight | less -r
+  pager = delta
+
+# delta
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    features = side-by-side line-numbers decorations
+    syntax-theme = Dracula
+    plus-style = syntax "#003800"
+    minus-style = syntax "#3f0001"
+
+[delta "decorations"]
+    commit-decoration-style = bold yellow box ul
+    file-style = bold yellow ul
+    file-decoration-style = none
+    hunk-header-decoration-style = cyan box ul
+
+[delta "line-numbers"]
+    line-numbers-left-style = cyan
+    line-numbers-right-style = cyan
+    line-numbers-minus-style = 124
+    line-numbers-plus-style = 28
+
+[format]
+  pretty = %Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset
+  graph = true
+[advice]
+  statusHints = false
+[log]
+  abbrevCommit = true
+[mergetool]
+  keepBackup = false
+  # delta
+  conflictstyle = diff3
+
+[ghi]
+  token = !security find-internet-password -a srobinson -s github.com -l ‘ghi token’ -w
+[pull]
+  rebase = true
+# [filter “lfs”]
+#   clean = git-lfs clean -- %f
+#   smudge = git-lfs smudge -- %f
+#   process = git-lfs filter-process
+#   required = true
+[diff]
+	compactionHeuristic = true
+  # delta
+  colorMoved = default
+[commit]
+	gpgsign = true
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

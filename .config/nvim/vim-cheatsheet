@@ -1,0 +1,66 @@
+
+
+C       c$
+s       cl
+S       ^C
+I       ^i
+A       $a
+o       A<CR>
+O       ko
+
+
+.           repeats
+
+f{char} t{char}     ; (jumps to next match)
+                    , (jumps to previous)
+
+
+daw         delete a word
+dap         delete a paragraph
+caw         change a word
+yyp         duplicate line
+
+ga          display character code
+
+INSERT MODE
+<C-r>{register}       paste a few words when in insert mode (slow)
+                      can break formatting
+<C-r><C-p>{register}  fast paste keeps formatting
+<C-v>u{1234}          insert unicode character
+
+<C-r>+                external app
+
+Yanking Registries
+- y{motion} uses both unamed registry and 0 registry
+- for example yy dd "0y puts the original yank
+- named registries a-z
+- A-Z appends registry
+
+"         unnamed register
+"0        yanked register
+"[a-z]    named register
+"+        external clipboard
+"*        X11 middle mouse clipboard
+
+:reg      lists contents of all the registries
+
+yw        copies following white space
+yiw       copies word boundary only
+
+p         puts the text after the cursor position
+P         puts the text before the cursor position
+"[a-z]    paste from name registry
+"+p       paste from external registry
+
+
+MARKS
+m[0-9a-z]       create new mark
+`[0-9a-z]       jump to mark
+
+Keystrokes Effect
+Insert character by decimal code
+Insert character by hexadecimal code
+Insert nondigit literally
+Insert character represented by   digraph
+
+I like fish and chips

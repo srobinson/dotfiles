@@ -1,0 +1,18 @@
+# https://starship.rs/config
+
+add_newline = true
+
+[character]
+success_symbol = "[➜](green)"
+error_symbol = "[✗](red)"
+vicmd_symbol = "[V](bold green) "
+
+[directory]
+fish_style_pwd_dir_length = 1
+
+[git_branch]
+symbol = "🌱"
+
+[package]
+disabled = true
+

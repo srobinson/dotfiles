@@ -1,0 +1,63 @@
+pane	1	1	:ui	1	:*	1	:/Users/stuart.s.robinson/Dev/apps/mushroom-react	1	zsh	:
+pane	1	1	:ui	1	:*	2	:/usr/local/Cellar	0	zsh	:
+pane	1	2	:api	0	:	1	:/Users/stuart.s.robinson/Dev/shell/devops	1	zsh	:
+pane	1	3	:ui	0	:-	1	:/Users/stuart.s.robinson/Dev/shell/devops/shellai_devops	1	zsh	:
+pane	admission-controllers	1	:ui	1	:*	1	:/Users/stuart.s.robinson/Dev/shell/devops/alphab/admission-controller-webhook-demo	1	vim	:vim deploy.sh
+pane	admission-controllers	1	:ui	1	:*	2	:/Users/stuart.s.robinson/Dev/shell/devops/alphab/admission-controller-webhook-demo	0	vim	:vim /Users/stuart.s.robinson/.tmux.conf
+pane	admission-controllers	1	:ui	1	:*	3	:/Users/stuart.s.robinson/Dev/apps	0	vim	:vim /Users/stuart.s.robinson/.tmux.conf
+pane	alphab	1	:vim	0	:-	1	:/Users/stuart.s.robinson/Dev/shell/devops/alphab	1	zsh	:
+pane	alphab	2	:prometheus	1	:*	1	:/Users/stuart.s.robinson/Dev/shell/devops/alphab/admission-controller-webhook-demo	0	zsh	:
+pane	alphab	2	:prometheus	1	:*	2	:/Users/stuart.s.robinson/Dev/shell/devops/alphab	0	zsh	:
+pane	alphab	2	:prometheus	1	:*	3	:/Users/stuart.s.robinson/Dev/shell/devops/alphab	0	zsh	:
+pane	alphab	2	:prometheus	1	:*	4	:/Users/stuart.s.robinson/Dev/shell/devops/alphab	1	vim	:vim NOTES
+pane	base	1	:vim	0	:-Z	1	:/Users/stuart.s.robinson/Dev/apps/exampleapp-api	0	zsh	:
+pane	base	1	:vim	0	:-Z	2	:/Users/stuart.s.robinson	1	zsh	:
+pane	base	2	:exampleapp-api	1	:*	1	:/usr/local/Cellar/sonarqube/8.4.1.35646/libexec/bin/macosx-universal-64	1	sh	:/bin/sh /usr/local/Cellar/sonarqube/8.4.1.35646/libexec/bin/macosx-universal-64/sonar.sh console
+pane	champagne	1	:jarvis	0	:-	1	:/Users/stuart.s.robinson/Dev/apps/champagne-jarvis	1	zsh	:
+pane	champagne	2	:ui	1	:*	1	:/Users/stuart.s.robinson/Dev/apps/champagne-ui	1	zsh	:
+pane	champagne	3	:jena	0	:	1	:/Users/stuart.s.robinson/Dev/apps/champagne-jena	1	zsh	:
+pane	donut	1	:crawler	0	:-	1	:/Users/stuart.s.robinson/Dev/apps/donut-crawler	1	zsh	:
+pane	donut	2	:data	1	:*	1	:/Users/stuart.s.robinson/Dev/apps/donut_data	1	zsh	:
+pane	donut	3	:ui	0	:	1	:/Users/stuart.s.robinson/Dev/apps/donut-ui	1	zsh	:
+pane	hazelnut	1	:bob	0	:-	1	:/Users/stuart.s.robinson/Dev/apps/hazelnut-bob	1	zsh	:
+pane	hazelnut	2	:ui	1	:*	1	:/Users/stuart.s.robinson/Dev/apps/hazelnut-ui	1	zsh	:
+pane	infra-pineapple	1	:zsh	1	:*	1	:/Users/stuart.s.robinson/Dev/apps/infra-pineapple	1	zsh	:
+pane	orbs	1	:devops-repo-tools	1	:*	1	:/Users/stuart.s.robinson/Dev/shell/devops/devops-repo-tools	1	zsh	:
+pane	orbs	2	:vim	0	:-	1	:/Users/stuart.s.robinson/Dev/shell/devops/devops-circleci-orbs	1	zsh	:
+pane	pancake	1	:zshpancake	1	:*	1	:/Users/stuart.s.robinson/Dev/apps/pancake	1	zsh	:
+pane	pineapple	1	:ui	1	:*	1	:/Users/stuart.s.robinson/Dev/apps/pineapple-ui	1	zsh	:
+pane	stencli	1	:docs	0	:-	1	:/Users/stuart.s.robinson	1	zsh	:
+pane	stencli	2	:tutorial	1	:*	1	:/Users/stuart.s.robinson	0	zsh	:
+pane	stencli	2	:tutorial	1	:*	2	:/Users/stuart.s.robinson/Dev/apps/champagne-jarvis	1	zsh	:
+pane	strawberry	1	:be	0	:-	1	:/Users/stuart.s.robinson/Dev/apps/strawberry-be	1	zsh	:
+pane	strawberry	2	:api	0	:	1	:/Users/stuart.s.robinson/Dev/apps/strawberry-api	1	zsh	:
+pane	strawberry	3	:ui	1	:*	1	:/Users/stuart.s.robinson/Dev/apps/strawberry-ui	1	zsh	:
+pane	sunflower	1	:ui	1	:*	1	:/Users/stuart.s.robinson/Dev/apps/sunflower-ui	1	zsh	:
+window	1	1	1	:*	cce0,208x56,0,0{104x56,0,0,1,103x56,105,0,2}
+window	1	2	0	:	c8a0,208x56,0,0,3
+window	1	3	0	:-	c8a1,208x56,0,0,4
+window	admission-controllers	1	1	:*	281e,208x56,0,0{104x56,0,0,5,51x56,105,0,6,51x56,157,0,7}
+window	alphab	1	0	:-	c8a5,208x56,0,0,8
+window	alphab	2	1	:*	5392,208x56,0,0{68x56,0,0,9,68x56,69,0[68x28,69,0,10,68x27,69,29,11],70x56,138,0,12}
+window	base	1	0	:-Z	3098,208x56,0,0{104x56,0,0,13,103x56,105,0,14}
+window	base	2	1	:*	6484,208x56,0,0,15
+window	champagne	1	0	:-	6485,208x56,0,0,16
+window	champagne	2	1	:*	6486,208x56,0,0,17
+window	champagne	3	0	:	6487,208x56,0,0,18
+window	donut	1	0	:-	6488,208x56,0,0,19
+window	donut	2	1	:*	e47f,208x56,0,0,20
+window	donut	3	0	:	e480,208x56,0,0,21
+window	hazelnut	1	0	:-	e481,208x56,0,0,22
+window	hazelnut	2	1	:*	e482,208x56,0,0,23
+window	infra-pineapple	1	1	:*	e483,208x56,0,0,24
+window	orbs	1	1	:*	e484,208x56,0,0,25
+window	orbs	2	0	:-	e485,208x56,0,0,26
+window	pancake	1	1	:*	e486,208x56,0,0,27
+window	pineapple	1	1	:*	e487,208x56,0,0,28
+window	stencli	1	0	:-	e488,208x56,0,0,29
+window	stencli	2	1	:*	3096,208x56,0,0{104x56,0,0,30,103x56,105,0,31}
+window	strawberry	1	0	:-	6482,208x56,0,0,32
+window	strawberry	2	0	:	6483,208x56,0,0,33
+window	strawberry	3	1	:*	6484,208x56,0,0,34
+window	sunflower	1	1	:*	6485,208x56,0,0,35
+state	1	strawberry

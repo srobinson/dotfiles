@@ -1,0 +1,8 @@
+.autoops.locked
+.env
+.husky
+.vscode
+.yarn
+.yarnrc
+*.swp
+TMP
