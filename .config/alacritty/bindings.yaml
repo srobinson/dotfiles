@@ -1,0 +1,10 @@
+key_bindings:
+  - { key: Left, mods: Option, chars: "\x1bb" }
+  - { key: Right, mods: Option, chars: "\x1bf" }
+  - { key: Return, mods: Shift, chars: "\x1b[13;2u" }
+  - { key: Return, mods: Control, chars: "\x1b[13;5u" }
+  - { key: H,        mods: Command, chars: "\x1bh" }
+  - { key: J,        mods: Command, chars: "\x1bj" }
+  - { key: K,        mods: Command, chars: "\x1bk" }
+  - { key: L,        mods: Command, chars: "\x1bl" }
+

@@ -24,6 +24,7 @@ Plug 'hashivim/vim-terraform'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'neovim/nvim-lspconfig'
+Plug 'norcalli/nvim-colorizer.lua'
 Plug 'numToStr/Comment.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
@@ -38,9 +39,13 @@ Plug 'williamboman/nvim-lsp-installer'
 Plug 'unblevable/quick-scope'
 call plug#end()
 
+set termguicolors
+set background=dark
+
 lua require('lsp')
 lua require('gitsigns').setup()
 lua require('Comment').setup()
+lua require('colorizer').setup()
 
 set signcolumn=yes
 set colorcolumn=120
@@ -84,8 +89,6 @@ noremap <C-Space> 10k
 noremap ZX ZQ
 noremap <C-s> :w<CR>
 
-set termguicolors
-set background=dark
 " wait for plugins to load before using colorshceme
 autocmd vimenter * ++nested colorscheme gruvbox-material
 let g:lightline = {'colorscheme' : 'gruvbox_material'}

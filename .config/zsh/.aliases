@@ -17,6 +17,7 @@ alias fpath="echo $fpath | tr ' ' '\n' | sort"
 alias v="nvim"
 alias vi="nvim"
 alias vim="nvim"
+alias x="xplr"
 
 # fix python path isse (brew docotor)
 # https://github.com/pyenv/pyenv/issues/106
@@ -115,6 +116,8 @@ alias iplocal='ipconfig getifaddr en0'
 # ----------------------------------
 # kubectl
 # --------------------------------------------------------------
+
+alias e="eksctl"
 
 alias -g k="kubectl"
 alias kx="kubectx"

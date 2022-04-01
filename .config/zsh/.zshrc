@@ -8,11 +8,15 @@ export EDITOR=nvim
 export VISUAL=nvim
 export KUBE_EDITOR=nvim
 
+# https://github.com/zsh-users/zsh-syntax-highlighting/issues/67
+autoload -U select-word-style
+select-word-style bash
+
 source "$ZDOTDIR/zsh-functions"
 zsh_add_plugin "reegnz/jq-zsh-plugin"
 zsh_add_plugin "zsh-users/zsh-autosuggestions" 
-# zsh_add_plugin "zsh-users/zsh-syntax-highlighting"
-# zsh_add_plugin "hlissner/zsh-autopair"
+zsh_add_plugin "zsh-users/zsh-syntax-highlighting"
+zsh_add_plugin "hlissner/zsh-autopair"
 # zsh_add_plugin "Aloxaf/fzf-tab"
 zsh_add_plugin "rupa/z"
 
@@ -95,9 +99,10 @@ done
 
 compinit -C
 
-# TODO: figure out why this needs to be below compinit
-# also is there a better way of doing this
+# TODO: is there a better way of doing this?
 . <(kubectl completion zsh)
+# TODO: REFACTOR ME
+. /usr/local/share/zsh/site-functions/aws_zsh_completer.sh
 
 #  brew install zsh-syntax-highlighting
 if [ -e /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && [ -z ZSH_HIGHLIGHTING_LOADED ]; then 
